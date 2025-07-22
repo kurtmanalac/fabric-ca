@@ -1,8 +1,8 @@
-FROM hyperledger/fabric-ca:1.5
+FROM hyperledger/fabric-ca:1.5 as fabric-ca
 
 WORKDIR /app
 
-COPY . /tmp/data/fabric-ca
+COPY --from=fabric-ca /etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca
 
 RUN mkdir -p /app/data
 
