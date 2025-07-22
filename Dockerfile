@@ -10,5 +10,4 @@ RUN mkdir -p /app/data
 COPY data.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/data.sh
 
-VOLUME ["/app/data"]
 CMD ["/usr/local/bin/data.sh"]
