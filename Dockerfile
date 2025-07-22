@@ -1,15 +1,8 @@
-FROM hyperledger/fabric-ca:1.5 as fabric-ca
-
-EXPOSE 7054
-
-# Start the CA server
-ENTRYPOINT ["sh", "-c", "fabric-ca-server", "start", "-b", "admin:adminpw"]
-
-FROM ubuntu:20.04
+FROM hyperledger/fabric-ca:1.5
 
 WORKDIR /app
 
-COPY --from=fabric-ca . /tmp/data/fabric-ca
+COPY . /tmp/data/fabric-ca
 
 RUN mkdir -p /app/data
 
@@ -17,3 +10,8 @@ COPY data.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/data.sh
 
 CMD ["/usr/local/bin/data.sh"]
+
+EXPOSE 7054
+
+# Start the CA server
+ENTRYPOINT ["sh", "-c", "fabric-ca-server", "start", "-b", "admin:adminpw"]
