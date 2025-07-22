@@ -2,7 +2,7 @@ FROM hyperledger/fabric-ca:1.5 as cert-auth
 
 WORKDIR /app
 
-COPY --from=ca /etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca
+COPY --from=cert-auth /etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca
 
 RUN mkdir -p /app/data
 
