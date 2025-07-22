@@ -1,15 +1,17 @@
-FROM hyperledger/fabric-ca:1.5 as cert-auth-builder
-EXPOSE 7054
-
-ENTRYPOINT ["fabric-ca-server", "start", "-b", "admin:adminpw"]
-
 FROM hyperledger/fabric-ca:1.5
 
-COPY --from=cert-auth-builder /etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca-server
-COPY --from=cert-auth-builder /root /tmp/data/root
-RUN mkdir -p /app/data
+RUN mkdir -p /app/data/fabric-ca
+RUN mkdir -p /app/data/fabric-ca-server
+RUN mkdir -p /app/data/fabric-ca-client
 
-COPY data.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/data.sh
+ENV FABRIC_CA_HOME=/app/data/fabric-ca
+ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
+ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
-CMD ["/usr/local/bin/data.sh"]
+WORKDIR /app
+# COPY data.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/data.sh
+
+# CMD ["/usr/local/bin/data.sh"]
+EXPOSE 7054
+CMD ["fabric-ca-server", "start", "-b", "admin:adminpw"]
