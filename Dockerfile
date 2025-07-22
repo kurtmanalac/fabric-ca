@@ -4,8 +4,7 @@ FROM ubuntu:20.04
 
 WORKDIR /app
 
-COPY --from=fabric-ca /etc/hyperledger /tmp/data/fabric-ca-server/
-COPY --from=fabric-ca /root /tmp/data/fabric-ca-client/
+COPY --from=fabric-ca . /tmp/data/fabric-ca
 
 RUN mkdir -p /app/data
 
