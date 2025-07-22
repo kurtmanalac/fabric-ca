@@ -1,12 +1,7 @@
-FROM hyperledger/fabric-ca:1.5 as cert-auth-builder
-
-# ENV FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-# ENV FABRIC_CA_CLIENT_HOME=/root
-
 FROM hyperledger/fabric-ca:1.5
 
-COPY --from=cert-auth-builder ./etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca-server
-COPY --from=cert-auth-builder ./root /tmp/data/root
+COPY --from=hyperledger/fabric-ca:1.5 /etc/hyperledger/fabric-ca-server /tmp/data/fabric-ca-server
+COPY --from=hyperledger/fabric-ca:1.5 /root /tmp/data/root
 RUN mkdir -p /app/data
 
 COPY data.sh /usr/local/bin/
