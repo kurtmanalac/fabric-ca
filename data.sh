@@ -10,4 +10,4 @@ if [ -z "$(ls -A /app/data)" ]; then
 fi
 
 # Start your actual application (replace with your command)
-exec "$@"
+exec -c 'fabric-ca-server start -b admin:adminpw'
