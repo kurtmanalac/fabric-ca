@@ -8,7 +8,7 @@ ENV FABRIC_CA_HOME=/app/data/fabric-ca
 ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
 ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
-WORKDIR /app
+WORKDIR /app/data
 # COPY data.sh /usr/local/bin/
 # RUN chmod +x /usr/local/bin/data.sh
 
