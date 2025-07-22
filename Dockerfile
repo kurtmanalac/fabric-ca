@@ -12,5 +12,3 @@ COPY data.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/data.sh
 
 CMD ["/usr/local/bin/data.sh"]
-CMD ["fabric-ca-server" "start" "-b" "admin:adminpw"]
-
