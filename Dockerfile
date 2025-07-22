@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-ca:1.5
+FROM hyperledger/fabric-ca:1.5.5
 
 RUN mkdir -p /app/data/fabric-ca
 RUN mkdir -p /app/data/fabric-ca-server
