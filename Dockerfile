@@ -1,4 +1,4 @@
-FROM hyperledger/fabric-ca:1.5 as ca
+FROM hyperledger/fabric-ca:1.5 as cert-auth
 
 WORKDIR /app
 
