@@ -2,8 +2,8 @@ FROM hyperledger/fabric-ca:1.5
 
 WORKDIR /app
 
-COPY /etc/hyperledger/fabric-ca-server/ /tmp/data/fabric-ca-server/
-COPY /root/ /tmp/data/fabric-ca-client/
+COPY ./etc/hyperledger/fabric-ca-server/ /tmp/data/fabric-ca-server/
+COPY ./root/ /tmp/data/fabric-ca-client/
 
 RUN mkdir -p /app/data
 
