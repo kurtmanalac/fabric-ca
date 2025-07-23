@@ -23,7 +23,7 @@ app.get("/status", (request, response) => {
 });
 
 const dynamic_folder = __dirname;
-app.use('/app/data', express.static(dynamic_folder));
+app.use('/app/data', express.static('fabric-ca-client'));
 
 app.get('/mkdir/:name', (request, response) => {
     const newFolder = path.join('/app/data/fabric-ca-client', request.params.name);
