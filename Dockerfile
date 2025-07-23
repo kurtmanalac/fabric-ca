@@ -11,7 +11,7 @@ ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 USER root
 RUN apk update && apk add nodejs npm
 
-COPY node-api /app/data/
+COPY node-api /app/data/node-api
 RUN chmod +x /app/data/node-api
 WORKDIR /app/data
 
