@@ -8,8 +8,6 @@ ENV FABRIC_CA_HOME=/app/data/fabric-ca
 ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
 ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
-WORKDIR /app/data
-
 # Install a simple HTTP server
 USER root
 RUN apk update && apk add python3
