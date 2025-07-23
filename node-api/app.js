@@ -23,7 +23,7 @@ app.get("/status", (request, response) => {
 });
 
 const dynamic_folder = __dirname;
-app.use('/app/data', express.static(__dirname));
+app.use('/app/data', express.static(dynamic_folder));
 
 app.get('/mkdir/:name', (request, response) => {
     const newFolder = path.join(dynamic_folder, request.params.name);
