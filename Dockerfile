@@ -15,7 +15,7 @@ WORKDIR /app/data
 # CMD ["/usr/local/bin/data.sh"]
 # Install a simple HTTP server
 USER root
-RUN apt-get update && apt-get install -y python3
+RUN apk update && apk add -y python3
 EXPOSE 8000
 
 # Start both your original service and HTTP server
