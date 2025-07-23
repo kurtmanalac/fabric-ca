@@ -13,6 +13,11 @@ WORKDIR /app/data
 # RUN chmod +x /usr/local/bin/data.sh
 
 # CMD ["/usr/local/bin/data.sh"]
-ADD data.sh /
+# Install a simple HTTP server
+RUN apt-get update && apt-get install -y python3
+EXPOSE 8000
+
+# Start both your original service and HTTP server
 EXPOSE 7054
 CMD ["fabric-ca-server", "start", "-b", "admin:adminpw"]
+CMD python3 -m http.server 8000
