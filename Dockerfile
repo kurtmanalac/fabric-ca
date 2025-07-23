@@ -20,7 +20,7 @@ COPY data.sh /app/data/data.sh
 RUN chmod +x /app/data/data.sh
 
 # Start both your original service and HTTP server
-CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw]
+CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw"]
 
 
 # CMD ["data.sh"]
