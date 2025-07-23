@@ -13,8 +13,10 @@ RUN apk update && apk add nodejs npm
 
 COPY node-api /app/data/node-api
 RUN chmod +x /app/data/node-api
-COPY data.sh /app/data/data.sh
-RUN chmod +x /app/data/data.sh
+COPY server-startup.sh /app/data/server-startup.sh
+RUN chmod +x /app/data/server-startup.sh
+COPY admin-enroll.sh /app/data/admin-enroll.sh
+RUN chmod +x /app/data/admin-enroll.sh
 WORKDIR /app/data
 
-CMD ["/app/data/data.sh"]
+CMD ["/app/data/server-startup.sh"]
