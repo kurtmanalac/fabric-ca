@@ -30,7 +30,7 @@ app.get('/mkdir/:name', (request, response) => {
         fs.mkdirSync(newFolder, { recursive: true });
     }
 
-    response.send(`Folder '${folderName}' created and exposed at /app/data/fabric-ca-client/${folderName}`);
+    response.send('Folder created and exposed');
 });
 
 app.post('/copy-msp', async (request, response) => {
