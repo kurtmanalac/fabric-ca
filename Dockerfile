@@ -13,9 +13,9 @@ RUN apk update && apk add nodejs npm
 
 COPY node-api /app/node-api
 RUN chmod +x /app/node-api
-COPY server-startup.sh /app/data/server-startup.sh
+COPY server-startup.sh /app/server-startup.sh
 RUN chmod +x /app/server-startup.sh
-COPY admin-enroll.sh /app/data/admin-enroll.sh
+COPY admin-enroll.sh /app/admin-enroll.sh
 RUN chmod +x /app/admin-enroll.sh
 WORKDIR /app
 
