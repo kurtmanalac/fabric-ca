@@ -14,6 +14,7 @@ WORKDIR /app/data
 
 # CMD ["/usr/local/bin/data.sh"]
 # Install a simple HTTP server
+USER root
 RUN apt-get update && apt-get install -y python3
 EXPOSE 8000
 
