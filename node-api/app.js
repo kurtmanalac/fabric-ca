@@ -1,4 +1,6 @@
 const express = require('express');
+const axios = require('axios');
+const unzipper = require('unzipper');
 const path = require('path');
 const fs = require('fs');
 const fsp = require('fs').promises;
@@ -33,24 +35,38 @@ app.get('/mkdir/:name', (request, response) => {
     response.send('Folder created and exposed');
 });
 
-app.post('/copy-msp', (request, response) => {
-    const { sourcePath, destinationPath } = request.body;
+app.post('/copy-msp', async (req, res) => {
+    const { sourcePath, destinationPath } = req.body;
 
     if (!sourcePath || !destinationPath) {
-        return response.status(400).json({ error: 'Source and destination paths are required.' });
+        return res.status(400).json({ error: 'Source and destination paths are required.' });
     }
 
     try {
         // Ensure the destination directory exists
-        const parentDir = path.dirname(destinationPath);
-        fs.mkdir(parentDir, { recursive: true });
-        // Use fsp.cp for recursive folder copying (Node.js v16+)
-        fs.cp(sourcePath, destinationPath, { recursive: true });
+        if (!fssync.existsSync(destinationPath)) {
+            await fsp.mkdir(destinationPath, { recursive: true });
+        }
 
-        response.status(200).json({ message: 'Folder copied successfully!' });
+        // Download the ZIP file from the URL and extract it directly to the destination
+        const response = await axios({
+            method: 'get',
+            url: sourcePath,
+            responseType: 'stream'
+        });
+
+        // Pipe the ZIP stream to unzipper
+        await new Promise((resolve, reject) => {
+            response.data
+                .pipe(unzipper.Extract({ path: destinationPath }))
+                .on('close', resolve)
+                .on('error', reject);
+        });
+
+        res.status(200).json({ message: 'Folder downloaded and extracted successfully.' });
     } catch (error) {
-        console.error('Error copying folder:', error);
-        response.status(500).json({ error: 'Failed to copy folder.' });
+        console.error('Error copying folder from URL:', error);
+        res.status(500).json({ error: 'Failed to copy folder from URL.' });
     }
 });
 
