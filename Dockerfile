@@ -9,9 +9,10 @@ ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
 ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
 WORKDIR /app/data
-COPY data.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/data.sh
+# COPY data.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/data.sh
 
 # CMD ["/usr/local/bin/data.sh"]
+ADD data.sh /
 EXPOSE 7054
 CMD ["fabric-ca-server", "start", "-b", "admin:adminpw"]
