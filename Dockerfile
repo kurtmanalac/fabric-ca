@@ -19,4 +19,4 @@ COPY admin-enroll.sh /app/data/admin-enroll.sh
 RUN chmod +x /app/data/admin-enroll.sh
 WORKDIR /app/data
 
-CMD ["/app/data/server-startup.sh"]
+# CMD ["/app/data/server-startup.sh"]
