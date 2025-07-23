@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 fabric-ca-server start -b admin:adminpw
 
