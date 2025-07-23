@@ -11,12 +11,12 @@ ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 USER root
 RUN apk update && apk add nodejs npm
 
-COPY node-api /app/data/node-api
-RUN chmod +x /app/data/node-api
+COPY node-api /app/node-api
+RUN chmod +x /app/node-api
 COPY server-startup.sh /app/data/server-startup.sh
-RUN chmod +x /app/data/server-startup.sh
+RUN chmod +x /app/server-startup.sh
 COPY admin-enroll.sh /app/data/admin-enroll.sh
-RUN chmod +x /app/data/admin-enroll.sh
-WORKDIR /app/data
+RUN chmod +x /app/admin-enroll.sh
+WORKDIR /app
 
-# CMD ["/app/data/server-startup.sh"]
+CMD ["/app/server-startup.sh"]
