@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsp = require('fs').promises;
 const { exec } = require('child_process');
 const app = express ();
 app.use(express.json());
@@ -41,10 +42,10 @@ app.post('/copy-msp', async (request, response) => {
 
     try {
         // Ensure the destination directory exists
-        await fs.mkdir(destinationPath, { recursive: true });
+        await fsp.mkdir(destinationPath, { recursive: true });
 
-        // Use fs.cp for recursive folder copying (Node.js v16+)
-        await fs.cp(sourcePath, destinationPath, { recursive: true });
+        // Use fsp.cp for recursive folder copying (Node.js v16+)
+        await fsp.cp(sourcePath, destinationPath, { recursive: true });
 
         response.status(200).json({ message: 'Folder copied successfully!' });
     } catch (error) {
