@@ -21,4 +21,4 @@ EXPOSE 7054
 COPY data.sh /data.sh
 RUN chmod +x /data.sh
 
-CMD ["/data.sh"]
+CMD ["./data.sh"]
