@@ -1,3 +1,5 @@
 #!/bin/bash
 
-fabric-ca-client
+fabric-ca-server start -b admin:adminpw
+
+node node-api/app.js
