@@ -25,8 +25,8 @@ app.use('/app/data/fabric-ca-client', express.static(dynamic_folder));
 app.get('/mkdir/:name', (request, response) => {
     const newFolder = path.join(dynamic_folder, request.params.name);
     
-    if (!fs.existsSync(folderPath)) {
-        fs.mkdirSync(folderPath, { recursive: true });
+    if (!fs.existsSync(newFolder)) {
+        fs.mkdirSync(newFolder, { recursive: true });
     }
 
     response.send(`Folder '${folderName}' created and exposed at /app/data/fabric-ca-client/${folderName}`);
