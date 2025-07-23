@@ -33,7 +33,7 @@ app.get('/mkdir/:name', (request, response) => {
     response.send('Folder created and exposed');
 });
 
-app.post('/copy-msp', async (request, response) => {
+app.post('/copy-msp', (request, response) => {
     const { sourcePath, destinationPath } = request.body;
 
     if (!sourcePath || !destinationPath) {
@@ -43,10 +43,10 @@ app.post('/copy-msp', async (request, response) => {
     try {
         // Ensure the destination directory exists
         const parentDir = path.dirname(destinationPath);
-        await fsp.mkdir(parentDir, { recursive: true });
+        fs.mkdir(parentDir, { recursive: true });
 
         // Use fsp.cp for recursive folder copying (Node.js v16+)
-        await fsp.cp(sourcePath, destinationPath, { recursive: true });
+        fs.cp(sourcePath, destinationPath, { recursive: true });
 
         response.status(200).json({ message: 'Folder copied successfully!' });
     } catch (error) {
