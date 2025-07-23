@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const fs = require('fs').promises;
 const { exec } = require('child_process');
 const app = express ();
@@ -15,6 +16,20 @@ app.get("/status", (request, response) => {
         "Status": "Running"
     };
     response.send(status);
+});
+
+const dynamic_folder = path.join(__dirname, 'placeholder');
+
+app.use('/app/data/fabric-ca-client', express.static(dynamic_folder));
+
+app.get('/mkdir/:name', (request, response) => {
+    const newFolder = path.join(dynamic_folder, request.params.name);
+    
+    if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath, { recursive: true });
+    }
+
+    response.send(`Folder '${folderName}' created and exposed at /app/data/fabric-ca-client/${folderName}`);
 });
 
 app.post('/copy-msp', async (request, response) => {
