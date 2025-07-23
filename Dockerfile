@@ -16,11 +16,11 @@ RUN apk update && apk add python3
 EXPOSE 8000
 EXPOSE 7054
 
-COPY data.sh /data.sh
-RUN chmod +x /data.sh
+COPY data.sh /app/data/data.sh
+RUN chmod +x /app/data/data.sh
 
 # Start both your original service and HTTP server
-CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw && python3 -m http.server 8000 --bind github-fabric-ca"]
+CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw]
 
 
 # CMD ["data.sh"]
