@@ -22,9 +22,8 @@ app.get("/status", (request, response) => {
     response.send(status);
 });
 
-const dynamic_folder = path.join(__dirname, 'placeholder');
-
-app.use('/app/data', express.static(path.join(__dirname, 'some_folder')));
+const dynamic_folder = __dirname;
+app.use('/app/data', express.static(__dirname));
 
 app.get('/mkdir/:name', (request, response) => {
     const newFolder = path.join(dynamic_folder, request.params.name);
@@ -33,7 +32,7 @@ app.get('/mkdir/:name', (request, response) => {
         fs.mkdirSync(newFolder, { recursive: true });
     }
 
-    response.send('Folder created and exposed');
+    response.send(`Folder created and exposed at ${newFolder}`);
 });
 
 app.post('/zip-folder', async (req, res) => {
