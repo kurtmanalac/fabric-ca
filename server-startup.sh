@@ -3,10 +3,12 @@
 fabric-ca-server start -b admin:adminpw &
 FABRIC_CA_PID=$!
 
-./admin-enroll.sh &
-ADMIN_ENROLL_PID=$!
-
 node node-api/app.js &
 NODE_PID=$!
+
+sleep 5
+
+./admin-enroll.sh &
+ADMIN_ENROLL_PID=$!
 
 wait $FABRIC_CA_PID $NODE_PID $ADMIN_ENROLL_PID
