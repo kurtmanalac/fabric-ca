@@ -18,7 +18,7 @@ EXPOSE 8000
 # Start both your original service and HTTP server
 EXPOSE 7054
 # CMD ["sh", "-c", "python3", "-m", "http.server", "8000", "&&", "fabric-ca-server", "start", "-b", "admin:adminpw"]
-COPY data.sh /data.sh
-RUN chmod +x /data.sh
+COPY data.sh data.sh
+RUN chmod +x data.sh
 
 CMD ["./data.sh"]
