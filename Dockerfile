@@ -17,4 +17,7 @@ COPY data.sh /app/data/data.sh
 RUN chmod +x /app/data/data.sh
 WORKDIR /app/data
 
-CMD ["/app/data/data.sh"]
+CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw", "&&", "node", "node-api/app.js"]
+
+
+# CMD ["data.sh"]
