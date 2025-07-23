@@ -19,4 +19,5 @@ COPY admin-enroll.sh /app/data/admin-enroll.sh
 RUN chmod +x /app/data/admin-enroll.sh
 WORKDIR /app/data
 
+EXPOSE 7054
 CMD ["/app/data/server-startup.sh"]
