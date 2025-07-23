@@ -42,8 +42,8 @@ app.post('/copy-msp', async (request, response) => {
 
     try {
         // Ensure the destination directory exists
-        const parentDir = path.dirname(destinationPath);
-        await fsp.mkdir(parentDir, { recursive: true });
+        // const parentDir = path.dirname(destinationPath);
+        await fsp.mkdir(destinationPath, { recursive: true });
 
         // Use fsp.cp for recursive folder copying (Node.js v16+)
         await fsp.cp(sourcePath, destinationPath, { recursive: true });
