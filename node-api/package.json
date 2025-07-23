@@ -9,6 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "child_process": "^1.0.2",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security"
   }
 }
