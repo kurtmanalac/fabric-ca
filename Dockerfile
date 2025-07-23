@@ -17,4 +17,4 @@ COPY data.sh /app/data/data.sh
 RUN chmod +x /app/data/data.sh
 WORKDIR /app/data
 
-CMD ["data.sh"]
+CMD ["/app/data/data.sh"]
