@@ -8,17 +8,14 @@ ENV FABRIC_CA_HOME=/app/data/fabric-ca
 ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
 ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
-# Install a simple HTTP server
+WORKDIR /app/data
 USER root
-RUN apk update && apk add python3
-EXPOSE 8000
-EXPOSE 7054
+RUN apk update && apk add nodejs npm
 
-COPY data.sh /app/data/data.sh
-RUN chmod +x /app/data/data.sh
+COPY node-api /app/data/
+RUN chmod +x /app/data/node-api
 
-# Start both your original service and HTTP server
-CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw"]
+CMD ["sh", "-c", "fabric-ca-server start -b admin:adminpw", "&&", "node", "node-api/app.js"]
 
 
 # CMD ["data.sh"]
