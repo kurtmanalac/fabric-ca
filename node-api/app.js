@@ -81,7 +81,7 @@ app.post('/copy-msp', async (req, res) => {
 
     try {
         // Ensure the destination directory exists
-        if (!fssync.existsSync(destinationPath)) {
+        if (!fs.existsSync(destinationPath)) {
             await fsp.mkdir(destinationPath, { recursive: true });
         }
 
