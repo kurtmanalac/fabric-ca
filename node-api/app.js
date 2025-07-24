@@ -44,12 +44,12 @@ app.post('/zip-folder', async (req, res) => {
 
     try {
         // Ensure source folder exists
-        if (!fsp.existsSync(sourceFolder)) {
+        if (!fs.existsSync(sourceFolder)) {
             return res.status(404).json({ error: 'Source folder not found.' });
         }
 
         // Create write stream for zip file
-        const output = fsp.createWriteStream(zipPath);
+        const output = fs.createWriteStream(zipPath);
         const archive = archiver('zip', { zlib: { level: 9 } });
 
         output.on('close', () => {
