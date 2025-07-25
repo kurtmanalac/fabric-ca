@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "Admin enrollment..."
 mkdir -p $FABRIC_CA_CLIENT_HOME/admin/msp
 if fabric-ca-client identity list --id admin
