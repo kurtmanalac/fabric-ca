@@ -47,7 +47,7 @@ app.post('/zip-folder', async (req, res) => {
         if (!fs.existsSync(sourceFolder)) {
             return res.status(404).json({ error: 'Source folder not found.' });
         }
-        if (!fs.existsSync(sourceFolder + ".zip")) {
+        if (fs.existsSync(sourceFolder + ".zip")) {
             return res.status(200).json({ message: 'Zip file exists.'})
         }
         // Create write stream for zip file
@@ -126,7 +126,7 @@ app.post('/enroll', (request, response) => {
     //     return response.status(403).json({ error: `Command "${commandName}" is not allowed` });
     // }
 
-    exec('./peer-enroll.sh', {
+    exec('./enroll-peer.sh', {
         env: {
             ...process.env,
             ENROLL_ID: userId,
