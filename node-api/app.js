@@ -126,7 +126,7 @@ app.post('/enroll', (request, response) => {
     //     return response.status(403).json({ error: `Command "${commandName}" is not allowed` });
     // }
 
-    exec('peer-enroll.sh', {
+    exec('./peer-enroll.sh', {
         env: {
             ...process.env,
             ENROLL_ID: userId,

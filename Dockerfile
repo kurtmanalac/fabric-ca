@@ -13,6 +13,7 @@ RUN apk update && apk add nodejs npm
 
 COPY node-api /app/node-api
 RUN chmod +x /app/node-api
+RUN chmod +x /app/node-api/peer-enroll.sh
 COPY server-startup.sh /app/server-startup.sh
 RUN chmod +x /app/server-startup.sh
 COPY admin-enroll.sh /app/admin-enroll.sh
