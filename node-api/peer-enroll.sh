@@ -2,7 +2,7 @@
 
 echo "$ENROLL_ID enrollment..."
 mkdir -p $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp
-if fabric-ca-client identity list --id $ENROLL_ID
+if [-d "/app/data/fabric-ca-client/$ENROLL_ID"];
 then
     echo "$ENROLL_ID exists!"
 else
