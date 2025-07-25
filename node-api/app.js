@@ -25,15 +25,15 @@ app.get("/status", (request, response) => {
 const dynamic_folder = __dirname;
 app.use('/app/data/fabric-ca-client', express.static(path.join(__dirname, "..", "data", "fabric-ca-client")));
 
-app.get('/mkdir/:name', (request, response) => {
-    const newFolder = path.join('/app/data/fabric-ca-client', request.params.name);
+// app.get('/mkdir/:name', (request, response) => {
+//     const newFolder = path.join('/app/data/fabric-ca-client', request.params.name);
     
-    if (!fs.existsSync(newFolder)) {
-        fs.mkdirSync(newFolder, { recursive: true });
-    }
+//     if (!fs.existsSync(newFolder)) {
+//         fs.mkdirSync(newFolder, { recursive: true });
+//     }
 
-    response.send(`Folder created and exposed at ${newFolder}`);
-});
+//     response.send(`Folder created and exposed at ${newFolder}`);
+// });
 
 app.post('/zip-folder', async (req, res) => {
     const { sourceFolder, zipPath } = req.body;
@@ -47,7 +47,9 @@ app.post('/zip-folder', async (req, res) => {
         if (!fs.existsSync(sourceFolder)) {
             return res.status(404).json({ error: 'Source folder not found.' });
         }
-
+        if (!fs.existsSync(sourceFolder + ".zip")) {
+            return res.status(200).json({ message: 'Zip file exists.'})
+        }
         // Create write stream for zip file
         const output = fs.createWriteStream(zipPath);
         const archive = archiver('zip', { zlib: { level: 9 } });
@@ -72,59 +74,67 @@ app.post('/zip-folder', async (req, res) => {
     }
 });
 
-app.post('/copy-msp', async (req, res) => {
-    const { sourcePath, destinationPath } = req.body;
+// app.post('/copy-msp', async (req, res) => {
+//     const { sourcePath, destinationPath } = req.body;
 
-    if (!sourcePath || !destinationPath) {
-        return res.status(400).json({ error: 'Source and destination paths are required.' });
-    }
+//     if (!sourcePath || !destinationPath) {
+//         return res.status(400).json({ error: 'Source and destination paths are required.' });
+//     }
 
-    try {
-        // Ensure the destination directory exists
-        if (!fs.existsSync(destinationPath)) {
-            await fsp.mkdir(destinationPath, { recursive: true });
-        }
+//     try {
+//         // Ensure the destination directory exists
+//         if (!fs.existsSync(destinationPath)) {
+//             await fsp.mkdir(destinationPath, { recursive: true });
+//         }
 
-        // Download the ZIP file from the URL and extract it directly to the destination
-        const response = await axios({
-            method: 'get',
-            url: sourcePath,
-            responseType: 'stream'
-        });
+//         // Download the ZIP file from the URL and extract it directly to the destination
+//         const response = await axios({
+//             method: 'get',
+//             url: sourcePath,
+//             responseType: 'stream'
+//         });
 
-        // Pipe the ZIP stream to unzipper
-        await new Promise((resolve, reject) => {
-            response.data
-                .pipe(unzipper.Extract({ path: destinationPath }))
-                .on('close', resolve)
-                .on('error', reject);
-        });
+//         // Pipe the ZIP stream to unzipper
+//         await new Promise((resolve, reject) => {
+//             response.data
+//                 .pipe(unzipper.Extract({ path: destinationPath }))
+//                 .on('close', resolve)
+//                 .on('error', reject);
+//         });
 
-        res.status(200).json({ message: 'Folder downloaded and extracted successfully.' });
-    } catch (error) {
-        console.error('Error copying folder from URL:', error);
-        res.status(500).json({ error: 'Failed to copy folder from URL.' });
-    }
-});
+//         res.status(200).json({ message: 'Folder downloaded and extracted successfully.' });
+//     } catch (error) {
+//         console.error('Error copying folder from URL:', error);
+//         res.status(500).json({ error: 'Failed to copy folder from URL.' });
+//     }
+// });
 
 const allowedCommands = new Set([
     'fabric-ca-client'
 ]);
 
 app.post('/enroll', (request, response) => {
-    const {command} = request.body;
-    if (!command) {
-        return response.status(400).json({ error: 'No command provided' });
+    const {userId, userPw, customCmd} = request.body;
+    if (!userId || !userPw) {
+        return response.status(400).json({ error: 'No user credentials given' });
     }
 
     // Extract base command (first word)
-    const baseCommand = command.trim().split(/\s+/)[0];
+    // const baseCommand = command.trim().split(/\s+/)[0];
 
-    if (!allowedCommands.has(baseCommand)) {
-        return response.status(403).json({ error: `Command "${commandName}" is not allowed` });
-    }
+    // if (!allowedCommands.has(baseCommand)) {
+    //     return response.status(403).json({ error: `Command "${commandName}" is not allowed` });
+    // }
 
-    exec(command, (error, stdout, stderr) => {
+    exec('./peer-enroll.sh', {
+        env: {
+            ...process.env,
+            ENROLL_ID: userId,
+            ENROLL_PW: userPw,
+            CUSTOM_CMD: customCmd
+
+        }
+    }, (error, stdout, stderr) => {
         if (error) {
             return response.status(500).json({
                 error: error.message,
