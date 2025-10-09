@@ -48,7 +48,7 @@ app.post('/zip-folder', async (req, res) => {
             return res.status(404).json({ error: 'Source folder not found.' });
         }
         if (fs.existsSync(sourceFolder + ".zip")) {
-            return res.status(200).json({ message: 'Zip file exists.'})
+            return res.status(200).json({ message: 'Zip file exists.'});
         }
         // Create write stream for zip file
         const output = fs.createWriteStream(zipPath);
