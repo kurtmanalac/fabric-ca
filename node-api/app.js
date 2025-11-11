@@ -119,13 +119,6 @@ app.post('/enroll', (request, response) => {
         return response.status(400).json({ error: 'No user credentials given' });
     }
 
-    // Extract base command (first word)
-    // const baseCommand = command.trim().split(/\s+/)[0];
-
-    // if (!allowedCommands.has(baseCommand)) {
-    //     return response.status(403).json({ error: `Command "${commandName}" is not allowed` });
-    // }
-
     exec("/app/node-api/peer-enroll.sh", {
         env: {
             ...process.env,
@@ -145,4 +138,26 @@ app.post('/enroll', (request, response) => {
 
         response.json({ stdout, stderr });
     });
+});
+
+app.post('/invoke-script', async (req, res ) => {
+    const {shellScript, envVar } = req.body;
+    if (!shellScript){
+        return res.status(400).json({ error: 'Missing shellScript'});
+    }
+    try {
+        exec("./" + shellScript, {
+            env: {
+                ...process.env,
+                ...(envVar || {}) 
+            }
+        }, (error, stdout, stderr));
+        res.status(200).json({ stdout, stderr });
+    } catch(error){
+        return res.status(500).json({
+                error: error.message,
+                stderr,
+                stdout
+            });
+    }
 });
