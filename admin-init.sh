@@ -1,11 +1,11 @@
 #!/bin/sh
 
 echo "CA Admin enrollment..."
-mkdir -p $FABRIC_CA_HOME/ca-admin/msp
 if [ -d "$FABRIC_CA_HOME/ca-admin" ];
 then
     echo "Admin exists!"
 else
+    mkdir -p $FABRIC_CA_HOME/ca-admin/msp
     fabric-ca-client enroll -u http://admin:adminpw@localhost:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp
     echo "Admin enrolled!"
     # copy files to storage
