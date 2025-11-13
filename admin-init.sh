@@ -11,7 +11,7 @@ else
     # copy files to storage
     SOURCE_URL=${$SOURCE_URL:-http://github-fabric-ca.railway.internal:8000}
     SOURCE_FOLDER=${SOURCE_FOLDER:-/app/data}
-    FOLDER_NAME=${FOLDER_NAME:-"data"}
+    FOLDER_NAME=${FOLDER_NAME:-data}
     temp_URL=${temp_URL:-http://fabric-tools-storage.railway.internal:8000}
     transfer_json=$(jq -n --arg script "transfer-file.sh" --arg url "$SOURCE_URL" --arg pw "$SOURCE_FOLDER" --arg cmd "$FOLDER_NAME" '{shellScript: $script, envVar: {SOURCE_URL: $url, SOURCE_FOLDER: $folder, FOLDER_NAME: $name}}')
     echo "Transferring files..."
