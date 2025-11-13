@@ -6,9 +6,10 @@ FABRIC_CA_PID=$!
 node node-api/app.js &
 NODE_PID=$!
 
+wait $FABRIC_CA_PID $NODE_PID
 sleep 5
 
-SOURCE_URL=${$SOURCE_URL:-http://fabric-tools-storage.railway.internal:8000}
+SOURCE_URL=${SOURCE_URL:-http://fabric-tools-storage.railway.internal:8000}
 SOURCE_FOLDER=${SOURCE_FOLDER:-/app/data}
 FOLDER_NAME=${FOLDER_NAME:-data}
 temp_URL=${temp_URL:-http://github-fabric-ca.railway.internal:8000}
@@ -23,4 +24,4 @@ wait $TRANSFER_PID
 ./admin-init.sh &
 ADMIN_ENROLL_PID=$!
 
-wait $FABRIC_CA_PID $NODE_PID $ADMIN_ENROLL_PID
+wait $ADMIN_ENROLL_PID
