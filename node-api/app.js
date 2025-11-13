@@ -156,8 +156,8 @@ app.post('/invoke-script', async (req, res ) => {
     } catch(error){
         return res.status(500).json({
                 error: error.message,
-                stderr,
-                stdout
+                stderr: error.stderr,
+                stdout: error.stdout
             });
     }
 });
