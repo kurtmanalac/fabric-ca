@@ -145,19 +145,19 @@ app.post('/invoke-script', async (req, res ) => {
     if (!shellScript){
         return res.status(400).json({ error: 'Missing shellScript'});
     }
-    try {
-        exec("./" + shellScript, {
-            env: {
-                ...process.env,
-                ...(envVar || {}) 
-            }
-        }, (error, stdout, stderr));
-        res.status(200).json({ stdout, stderr });
-    } catch(error){
-        return res.status(500).json({
+    exec("./" + shellScript, {
+        env: {
+            ...process.env,
+            ...(envVar || {}) 
+        }
+    }, (error, stdout, stderr) => {
+        if (error) {
+            return res.status(500).json({
                 error: error.message,
-                stderr: error.stderr,
-                stdout: error.stdout
+                stderr: stderr || '',
+                stdout: stdout || ''
             });
-    }
+        }
+        return res.status(200).json({ stdout, stderr });
+    });
 });
