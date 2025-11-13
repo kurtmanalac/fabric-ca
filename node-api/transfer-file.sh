@@ -27,7 +27,7 @@ curl -X POST $CA_URL/invoke-script \
     -d '{
         "shellScript": "clean-zip.sh",
         "envVar": {
-            "CLEAN_ID_ZIP": ${node-api/transfer-file.sh}
+            "CLEAN_ID_ZIP": ${$SOURCE_FOLDER$FOLDER_NAME.zip}
             }
         }' &
 CLEAN_PID=$!
