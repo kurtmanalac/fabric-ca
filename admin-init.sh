@@ -9,7 +9,7 @@ else
     fabric-ca-client enroll -u http://admin:adminpw@localhost:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp
     echo "Admin enrolled!"
     # copy files to storage
-    SOURCE_URL=${$SOURCE_URL:-http://github-fabric-ca.railway.internal:8000}
+    SOURCE_URL=${SOURCE_URL:-http://github-fabric-ca.railway.internal:8000}
     SOURCE_FOLDER=${SOURCE_FOLDER:-/app/data}
     FOLDER_NAME=data
     temp_URL=${temp_URL:-http://fabric-tools-storage.railway.internal:8080}
