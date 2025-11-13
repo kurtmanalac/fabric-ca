@@ -22,7 +22,7 @@ COPY_PID=$!
 wait $COPY_PID
 
 echo "deleting zip file from $source..."
-curl -X POST $CA_URL/invoke-script \
+curl -X POST $SOURCE_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d '{
         "shellScript": "clean-zip.sh",
