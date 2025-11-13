@@ -17,7 +17,7 @@ ZIP_PID=$!
 wait $ZIP_PID
 
 mkdir -p $SOURCE_FOLDER
-curl -o $SOURCE_FOLDER$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER$FOLDER_NAME.zip &
+curl -o $SOURCE_FOLDER$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER/$FOLDER_NAME.zip &
 COPY_PID=$!
 wait $COPY_PID
 
@@ -27,13 +27,13 @@ curl -X POST $CA_URL/invoke-script \
     -d '{
         "shellScript": "clean-zip.sh",
         "envVar": {
-            "CLEAN_ID_ZIP": ${$SOURCE_FOLDER$FOLDER_NAME.zip}
+            "CLEAN_ID_ZIP": ${$SOURCE_FOLDER/$FOLDER_NAME.zip}
             }
         }' &
 CLEAN_PID=$!
 wait $CLEAN_PID
 
-unzip -o $SOURCE_FOLDER$FOLDER_NAME.zip -d $SOURCE_FOLDER &
+unzip -o $SOURCE_FOLDER/$FOLDER_NAME.zip -d $SOURCE_FOLDER &
 UNZIP_PID=$!
 wait $UNZIP_PID
-rm -r $SOURCE_FOLDER$FOLDER_NAME.zip
+rm -r $SOURCE_FOLDER/$FOLDER_NAME.zip
