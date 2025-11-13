@@ -1,12 +1,9 @@
 #!/bin/sh
 
-fabric-ca-server start -b admin:adminpw &
-FABRIC_CA_PID=$!
-
 node node-api/app.js &
 NODE_PID=$!
 
-wait $FABRIC_CA_PID $NODE_PID
+wait $NODE_PID
 sleep 5
 
 SOURCE_URL=${SOURCE_URL:-http://fabric-tools-storage.railway.internal:8000}
@@ -20,6 +17,11 @@ curl -X POST $temp_URL/invoke_script \
     -d "$transfer_json" &
 TRANSFER_PID=$!
 wait $TRANSFER_PID
+
+fabric-ca-server start -b admin:adminpw &
+FABRIC_CA_PID=$!
+
+wait $FABRIC_CA_PID
 
 ./admin-init.sh &
 ADMIN_ENROLL_PID=$!

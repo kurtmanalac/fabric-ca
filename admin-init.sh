@@ -2,7 +2,7 @@
 
 echo "CA Admin enrollment..."
 mkdir -p $FABRIC_CA_HOME/ca-admin/msp
-if [ -d "$FABRIC_CA_HOME/ca-admin/" ];
+if [ -d "$FABRIC_CA_HOME/ca-admin" ];
 then
     echo "Admin exists!"
 else
