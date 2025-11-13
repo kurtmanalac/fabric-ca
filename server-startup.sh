@@ -15,7 +15,7 @@ curl -X POST $temp_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d "$transfer_json" &
 TRANSFER_PID=$!
-
+wait $TRANSFER_PID
 sleep 5
 
 fabric-ca-server start -b admin:adminpw &
@@ -26,4 +26,4 @@ sleep 5
 ./admin-init.sh &
 ADMIN_ENROLL_PID=$!
 
-wait $NODE_PID $TRANSFER_PID $FABRIC_CA_PID $ADMIN_ENROLL_PID
+wait $NODE_PID $FABRIC_CA_PID $ADMIN_ENROLL_PID
