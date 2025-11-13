@@ -21,6 +21,18 @@ curl -o $SOURCE_FOLDER$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER.zip &
 COPY_PID=$!
 wait $COPY_PID
 
+echo "deleting zip file from $source..."
+curl -X POST $CA_URL/invoke-script \
+    -H "Content-Type: application/json" \
+    -d '{
+        "shellScript": "clean-zip.sh",
+        "envVar": {
+            "CLEAN_ID_ZIP": ${node-api/transfer-file.sh}
+            }
+        }' &
+CLEAN_PID=$!
+wait $CLEAN_PID
+
 unzip -o $SOURCE_FOLDER$FOLDER_NAME.zip -d $SOURCE_FOLDER &
 UNZIP_PID=$!
 wait $UNZIP_PID
