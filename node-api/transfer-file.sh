@@ -27,7 +27,7 @@ curl -X POST $SOURCE_URL/invoke-script \
     -d '{
         "shellScript": "clean-zip.sh",
         "envVar": {
-            "CLEAN_ID_ZIP": "$SOURCE_FOLDER/$FOLDER_NAME.zip"
+            "CLEAN_ID_ZIP": "$SOURCE_FOLDER.zip"
             }
         }' &
 CLEAN_PID=$!
