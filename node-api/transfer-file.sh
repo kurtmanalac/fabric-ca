@@ -19,9 +19,9 @@ curl -X POST $SOURCE_URL/zip-folder \
 sleep 5
 
 mkdir -p $SOURCE_FOLDER
-curl -o $SOURCE_FOLDER/$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER.zip 
-# COPY_PID=$!
-# wait $COPY_PID
+curl -o $SOURCE_FOLDER/$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER.zip &
+COPY_PID=$!
+wait $COPY_PID
 
 sleep 5
 
