@@ -33,7 +33,7 @@ curl -X POST $SOURCE_URL/invoke-script \
 CLEAN_PID=$!
 wait $CLEAN_PID
 
-unzip -o $SOURCE_FOLDER/$FOLDER_NAME.zip -d $SOURCE_FOLDER &
+unzip -o $SOURCE_FOLDER/$FOLDER_NAME.zip -d $SOURCE_FOLDER/ &
 UNZIP_PID=$!
 wait $UNZIP_PID
 rm -r $SOURCE_FOLDER/$FOLDER_NAME.zip
