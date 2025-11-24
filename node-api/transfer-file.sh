@@ -18,10 +18,10 @@ curl -X POST $SOURCE_URL/zip-folder \
 # wait $ZIP_PID
 
 mkdir -p $SOURCE_FOLDER
-curl -o $SOURCE_FOLDER.zip $SOURCE_URL$SOURCE_FOLDER.zip 
+curl -o $SOURCE_FOLDER/$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER.zip 
 # COPY_PID=$!
 # wait $COPY_PID
-
+sleep 5
 # echo "deleting zip file from $source..."
 # curl -X POST $SOURCE_URL/invoke-script \
 #     -H "Content-Type: application/json" \
@@ -29,7 +29,7 @@ curl -o $SOURCE_FOLDER.zip $SOURCE_URL$SOURCE_FOLDER.zip
 # CLEAN_PID=$!
 # wait $CLEAN_PID
 
-unzip -o $SOURCE_FOLDER.zip -d $SOURCE_FOLDER/ 
+unzip -o $SOURCE_FOLDER/$FOLDER_NAME.zip -d $SOURCE_FOLDER/ 
 # UNZIP_PID=$!
 # wait $UNZIP_PID
-rm -r $SOURCE_FOLDER.zip
+rm -r $SOURCE_FOLDER/$FOLDER_NAME.zip
