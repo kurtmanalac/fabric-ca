@@ -8,11 +8,12 @@ set -e
 #SOURCE_FOLDER
 #FOLDER_NAME
 zip_json=$(jq -n --arg src "$SOURCE_FOLDER" '{sourceFolder: $src, zipPath: ($src+".zip")}')
+clean_json=$(jq -n --arg src "$SOURCE_FOLDER" '{CLEAN_ID_ZIP": "$SOURCE_FOLDER.zip}')
 
 echo "Zipping MSP files from $SOURCE_FOLDER..."
 curl -X POST $SOURCE_URL/zip-folder \
     -H "Content-Type: application/json" \
-    -d "$zip_json"  &
+    -d "$zip_json" &
 ZIP_PID=$!
 wait $ZIP_PID
 
@@ -24,12 +25,7 @@ wait $COPY_PID
 echo "deleting zip file from $source..."
 curl -X POST $SOURCE_URL/invoke-script \
     -H "Content-Type: application/json" \
-    -d '{
-        "shellScript": "clean-zip.sh",
-        "envVar": {
-            "CLEAN_ID_ZIP": "$SOURCE_FOLDER.zip"
-            }
-        }' &
+    -d "$clean_json" &
 CLEAN_PID=$!
 wait $CLEAN_PID
 

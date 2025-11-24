@@ -18,6 +18,6 @@ else
     curl -X POST $temp_URL/invoke-script \
         -H "Content-Type: application/json" \
         -d "$transfer_json" &
-    # TRANSFER_PID=$!
-    # wait $TRANSFER_PID
+    TRANSFER_PID=$!
+    wait $TRANSFER_PID
 fi
