@@ -8,6 +8,7 @@ const fsp = require('fs').promises;
 const { exec } = require('child_process');
 const app = express ();
 app.use(express.json());
+app.use(express.static('app'));
 
 const PORT = process.env.PORT || 3000;
 
