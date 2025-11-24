@@ -8,7 +8,7 @@ set -e
 #SOURCE_FOLDER
 #FOLDER_NAME
 zip_json=$(jq -n --arg src "$SOURCE_FOLDER" '{sourceFolder: $src, zipPath: ($src+".zip")}')
-clean_json=$(jq -n --arg script "clean-zip.sh" --arg folder "$SOURCE_FOLDER.zip" '{"shellScript": $script, "envVar": {"SOURCE_FOLDER": $folder}}')
+clean_json=$(jq -n --arg script "clean-zip.sh" --arg folder "$SOURCE_FOLDER.zip" '{"shellScript": $script, "envVar": {"CLEAN_ID_ZIP": $folder}}')
 
 echo "Zipping MSP files from $SOURCE_FOLDER..."
 curl -X POST $SOURCE_URL/zip-folder \
