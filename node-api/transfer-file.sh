@@ -14,26 +14,20 @@ echo "Zipping MSP files from $SOURCE_FOLDER..."
 curl -X POST $SOURCE_URL/zip-folder \
     -H "Content-Type: application/json" \
     -d "$zip_json" 
-# ZIP_PID=$!
-# wait $ZIP_PID
+
 sleep 5
 
 echo "$SOURCE_URL$SOURCE_FOLDER"
 mkdir -p $SOURCE_FOLDER
 curl -f -# -o $SOURCE_FOLDER/$FOLDER_NAME.zip $SOURCE_URL$SOURCE_FOLDER.zip 
-# COPY_PID=$!
-# wait $COPY_PID
 
-sleep 10
+sleep 5
 
-# echo "deleting zip file from $source..."
-# curl -X POST $SOURCE_URL/invoke-script \
-#     -H "Content-Type: application/json" \
-#     -d "$clean_json" &
-# CLEAN_PID=$!
-# wait $CLEAN_PID
+echo "deleting zip file from $SOURCE_URL..."
+curl -X POST $SOURCE_URL/invoke-script \
+    -H "Content-Type: application/json" \
+    -d "$clean_json" 
 
 unzip -o $SOURCE_FOLDER/$FOLDER_NAME.zip -d $SOURCE_FOLDER/ 
-# UNZIP_PID=$!
-# wait $UNZIP_PID
+
 rm -r $SOURCE_FOLDER/$FOLDER_NAME.zip
