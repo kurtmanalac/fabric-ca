@@ -3,7 +3,7 @@
 # Exit on any error
 set -e
 
-curl -v http://fabric-tools-storage.railway.internal:8080/health
+# curl -v http://fabric-tools-storage.railway.internal:8080/health
 
 node node-api/app.js &
 NODE_PID=$!
