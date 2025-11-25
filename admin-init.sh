@@ -6,7 +6,7 @@ then
     echo "Admin exists!"
 else
     mkdir -p $FABRIC_CA_HOME/ca-admin/msp
-    fabric-ca-client enroll -u http://admin:adminpw@localhost:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp
+    fabric-ca-client enroll -u http://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp
     echo "Admin enrolled!"
     # copy files to storage
     SOURCE_URL=${SOURCE_URL:-http://github-fabric-ca.railway.internal:8000}
