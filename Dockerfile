@@ -16,6 +16,7 @@ RUN chmod +x /app/node-api
 RUN chmod +x /app/node-api/peer-enroll.sh
 RUN chmod +x /app/node-api/transfer-file.sh
 RUN chmod +x /app/node-api/clean-zip.sh
+RUN chmod +x /app/node-api/nodeOU-create.sh
 COPY server-startup.sh /app/server-startup.sh
 RUN chmod +x /app/server-startup.sh
 COPY admin-init.sh /app/admin-init.sh
