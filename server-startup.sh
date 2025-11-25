@@ -6,8 +6,10 @@ set -e
 # curl -v http://fabric-tools-storage.railway.internal:8080/health
 
 node node-api/app.js &
+NODE_PID=$!
 
 fabric-ca-server start -b admin:adminpw &
+FABRIC_PID=$!
 
 sleep 5
 
@@ -22,3 +24,5 @@ curl -X POST $temp_URL/invoke-script \
     -d "$transfer_json"
 
 ./admin-init.sh
+
+wait $NODE_PID $FABRIC_PID
