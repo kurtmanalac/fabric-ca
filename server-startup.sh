@@ -19,7 +19,6 @@ sleep 5
 
 fabric-ca-server start -b admin:adminpw
 
-./admin-init.sh &
-ADMIN_ENROLL_PID=$!
+./admin-init.sh
 
-wait $NODE_PID $ADMIN_ENROLL_PID
+wait $NODE_PID
