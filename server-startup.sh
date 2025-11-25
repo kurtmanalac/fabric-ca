@@ -25,6 +25,8 @@ sleep 5
 fabric-ca-server start -b admin:adminpw &
 FABRIC_CA_PID=$!
 
+sleep 5
+
 ./admin-init.sh
 
 wait $NODE_PID $FABRIC_CA_PID
