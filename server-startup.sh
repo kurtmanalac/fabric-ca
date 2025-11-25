@@ -7,6 +7,8 @@ set -e
 
 node node-api/app.js &
 
+fabric-ca-server start -b admin:adminpw &
+
 sleep 5
 
 SOURCE_URL=${SOURCE_URL:-http://fabric-tools-storage.railway.internal:8080}
@@ -18,11 +20,5 @@ echo "Transferring files..."
 curl -X POST $temp_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d "$transfer_json"
-
-sleep 5
-
-fabric-ca-server start -b admin:adminpw &
-
-sleep 10
 
 ./admin-init.sh
