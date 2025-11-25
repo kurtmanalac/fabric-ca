@@ -17,8 +17,9 @@ curl -X POST $temp_URL/invoke-script \
 
 sleep 5
 
-fabric-ca-server start -b admin:adminpw
+fabric-ca-server start -b admin:adminpw &
+FABRIC_CA_PID=$!
 
 ./admin-init.sh
 
-wait $NODE_PID
+wait $NODE_PID $FABRIC_CA_PID
