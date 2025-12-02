@@ -134,16 +134,17 @@ const allowedCommands = new Set([
 ]);
 
 app.post('/enroll', (request, response) => {
-    const {userId, userPw, customCmd} = request.body;
+    const {userId, userPw, idType, customCmd} = request.body;
     if (!userId || !userPw) {
         return response.status(400).json({ error: 'No user credentials given' });
     }
 
-    exec("/app/node-api/peer-enroll.sh", {
+    exec("/app/node-api/enroll-node.sh", {
         env: {
             ...process.env,
             ENROLL_ID: userId,
             ENROLL_PW: userPw,
+            ID_TYPE: idType,
             CUSTOM_CMD: customCmd
 
         }

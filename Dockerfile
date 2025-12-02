@@ -13,7 +13,7 @@ RUN apk update && apk add nodejs npm curl jq unzip
 
 COPY node-api /app/node-api
 RUN chmod +x /app/node-api
-RUN chmod +x /app/node-api/peer-enroll.sh
+RUN chmod +x /app/node-api/enroll-node.sh
 RUN chmod +x /app/node-api/transfer-file.sh
 RUN chmod +x /app/node-api/clean-zip.sh
 RUN chmod +x /app/node-api/nodeOU-create.sh
