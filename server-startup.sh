@@ -10,7 +10,7 @@ NODE_PID=$!
 
 mkdir -p /app/postgres
 echo -n | openssl s_client -starttls postgres -connect postgres.railway.internal:5432 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /app/postgres/ca.pem
-
+chmod 777 /app/postgres/ca.pem
 fabric-ca-server start -b admin:adminpw &
 FABRIC_PID=$!
 
