@@ -9,7 +9,7 @@ ENV FABRIC_CA_SERVER_HOME=/app/data/fabric-ca-server
 ENV FABRIC_CA_CLIENT_HOME=/app/data/fabric-ca-client
 
 USER root
-RUN apk update && apk add nodejs npm curl jq unzip
+RUN apk update && apk add nodejs npm curl jq unzip openssl
 
 COPY node-api /app/node-api
 RUN chmod +x /app/node-api
