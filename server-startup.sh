@@ -28,6 +28,6 @@ curl -X POST $temp_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d "$transfer_json"
 
-./admin-init.sh
+# ./admin-init.sh
 
 wait $NODE_PID $FABRIC_PID
