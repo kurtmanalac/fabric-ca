@@ -30,6 +30,6 @@ FABRIC_PID=$!
 
 sleep 5
 
-# ./admin-init.sh
+./admin-init.sh
 
 wait $NODE_PID $FABRIC_PID
