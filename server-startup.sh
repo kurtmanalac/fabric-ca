@@ -31,7 +31,8 @@ fabric-ca-server start -b admin:adminpw &
 FABRIC_PID=$!
 
 sleep 5
-
+find /app/data/fabric-ca-server -type d -exec chmod 755 {} \;
+sleep 5
 ./admin-init.sh
 
 wait $NODE_PID $FABRIC_PID
