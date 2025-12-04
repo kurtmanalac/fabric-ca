@@ -6,7 +6,7 @@ then
     echo "Admin exists!"
 else
     mkdir -p $FABRIC_CA_HOME/ca-admin/msp
-    fabric-ca-client enroll -u https://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp --csr.hosts $RAILWAY_PRIVATE_DOMAIN,$RAILWAY_SERVICE_NAME
+    fabric-ca-client enroll -u https://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp --csr.hosts $RAILWAY_PRIVATE_DOMAIN,$RAILWAY_SERVICE_NAME --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
     echo "Admin enrolled!"
     # copy files to storage
     SOURCE_URL=${SOURCE_URL:-http://github-fabric-ca.railway.internal:8000}
