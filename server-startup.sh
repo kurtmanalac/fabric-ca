@@ -13,11 +13,6 @@ NODE_PID=$!
 # sleep 5
 # #chmod 644 /app/postgres/ca.pem
 # sleep 5
-fabric-ca-server start -b admin:adminpw &
-FABRIC_PID=$!
-
-sleep 5
-
 SOURCE_URL=${SOURCE_URL:-http://fabric-tools-storage.railway.internal:8080}
 SOURCE_FOLDER=${SOURCE_FOLDER:-/app/data}
 FOLDER_NAME=data
@@ -27,6 +22,11 @@ echo "Transferring files..."
 curl -X POST $temp_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d "$transfer_json"
+
+fabric-ca-server start -b admin:adminpw &
+FABRIC_PID=$!
+
+sleep 5
 
 # ./admin-init.sh
 
