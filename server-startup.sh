@@ -8,6 +8,8 @@ set -e
 node node-api/app.js &
 NODE_PID=$!
 
+sleep 5
+
 # mkdir -p /app/postgres
 # echo -n | openssl s_client -starttls postgres -connect postgres.railway.internal:5432 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /app/postgres/ca.pem
 # sleep 5
