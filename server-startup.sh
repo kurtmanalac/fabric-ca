@@ -25,6 +25,8 @@ curl -X POST $temp_URL/invoke-script \
     -H "Content-Type: application/json" \
     -d "$transfer_json"
 
+sleep 5
+
 fabric-ca-server start -b admin:adminpw &
 FABRIC_PID=$!
 
