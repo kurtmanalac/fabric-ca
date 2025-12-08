@@ -38,6 +38,7 @@ else
     sleep 5
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
+    sleep 5
 fi
 
 ./admin-init.sh
