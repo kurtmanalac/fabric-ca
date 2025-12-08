@@ -35,8 +35,8 @@ then
 else
     echo "Init and Start"
     fabric-ca-server init -b admin:adminpw
-    sleep 5
-    find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -exec rm {} \;
+    #sleep 5
+    #find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -exec rm {} \;
     sleep 5
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
