@@ -15,7 +15,8 @@ else
     fabric-ca-client enroll -u https://$ENROLL_ID:$ENROLL_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/tls --enrollment.profile tls --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem $CUSTOM_CMD
     mkdir -p $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/tlscacerts
     cp $FABRIC_CA_SERVER_HOME/tls-cert.pem $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/tlscacerts/tls-cert.pem
-    rm -r $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/github-fabric-ca-railway-internal-7054.pem
-    cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/ca-cert.pem
+    mv $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/github-fabric-ca-railway-internal-7054.pem $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/ca-cert.pem
+    # rm -r $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/github-fabric-ca-railway-internal-7054.pem
+    # cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/ca-cert.pem
     echo "$ENROLL_ID registered!"
 fi
