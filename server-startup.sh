@@ -27,13 +27,19 @@ curl -X POST $temp_URL/invoke-script \
 
 sleep 5
 
-# include init first to isolate the first keyfile
-fabric-ca-server start -b admin:adminpw &
-FABRIC_PID=$!
+if [ -d "$FABRIC_CA_SERVER_HOME/msp" ]; 
+then
+    fabric-ca-server start -b admin:adminpw &
+    FABRIC_PID=$!
+else
+    a-server init -b admin:adminpw
+    sleep 5
+    find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -exec rm {} \;
+    sleep 5
+    fabric-ca-server start -b admin:adminpw &
+    FABRIC_PID=$!
+fi
 
-sleep 5
-chmod -R 755 /app/data/fabric-ca-server
-sleep 5
 ./admin-init.sh
 
 wait $NODE_PID $FABRIC_PID
