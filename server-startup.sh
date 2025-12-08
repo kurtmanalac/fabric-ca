@@ -42,6 +42,8 @@ else
     sleep 5
 fi
 
+cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_SERVER_HOME/msp/cacerts/ca-cert.pem
+
 ./admin-init.sh
 
 wait $NODE_PID $FABRIC_PID
