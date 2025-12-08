@@ -27,6 +27,7 @@ curl -X POST $temp_URL/invoke-script \
 
 sleep 5
 
+# include init first to isolate the first keyfile
 fabric-ca-server start -b admin:adminpw &
 FABRIC_PID=$!
 
