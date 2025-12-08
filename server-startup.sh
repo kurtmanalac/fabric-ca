@@ -27,11 +27,13 @@ curl -X POST $temp_URL/invoke-script \
 
 sleep 5
 
-if [ -d "$FABRIC_CA_SERVER_HOME/msp" ]; 
+if [ -d "/app/data/fabric-ca-server/msp" ]; 
 then
+    echo "Start only"
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
 else
+    echo "Init and Start"
     fabric-ca-server init -b admin:adminpw
     sleep 5
     find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -exec rm {} \;
