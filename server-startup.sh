@@ -37,7 +37,7 @@ else
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
     sleep 5
-    find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -print0 | xargs -0 ls -t | tail -n +2 | xargs rm
+    find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -print0 | xargs -0 ls -t | tail -n +2 | xargs rm -f
     sleep 5
 fi
 
