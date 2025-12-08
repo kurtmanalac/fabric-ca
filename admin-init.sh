@@ -6,7 +6,8 @@ then
     echo "Admin exists!"
 else
     mkdir -p $FABRIC_CA_HOME/ca-admin/msp
-    fabric-ca-client enroll -u https://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp --csr.hosts $RAILWAY_PRIVATE_DOMAIN,$RAILWAY_SERVICE_NAME --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
+    fabric-ca-client enroll -u https://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
+    fabric-ca-client enroll -u https://admin:adminpw@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_HOME/ca-admin/msp --csr.hosts $RAILWAY_PRIVATE_DOMAIN,$RAILWAY_SERVICE_NAME --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem --enrollment.profile tls
     echo "Admin enrolled!"
     mkdir -p $FABRIC_CA_HOME/ca-admin/msp/tlscacerts
     cp $FABRIC_CA_SERVER_HOME/tls-cert.pem $FABRIC_CA_HOME/ca-admin/msp/tlscacerts/tls-cert.pem
