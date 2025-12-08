@@ -39,7 +39,7 @@ else
     FABRIC_PID=$!
     sleep 10
     find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -print0 | xargs -0 ls -t | tail -n +2 | xargs rm -f
-    sleep 5
+    sleep 10
 fi
 
 # mkdir -p $FABRIC_CA_SERVER_HOME/msp
