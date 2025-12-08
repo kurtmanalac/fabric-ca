@@ -33,13 +33,11 @@ then
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
 else
-    echo "Init and Start"
-    fabric-ca-server init -b admin:adminpw
-    #sleep 5
-    #find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -exec rm {} \;
-    sleep 5
+    echo "Start very first time"
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
+    sleep 5
+    find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -print0 | xargs -0 ls -t | tail -n +2 | xargs rm
     sleep 5
 fi
 
