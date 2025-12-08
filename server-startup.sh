@@ -32,11 +32,12 @@ then
     echo "Start only"
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
+    sleep 5
 else
     echo "Start very first time"
     fabric-ca-server start -b admin:adminpw &
     FABRIC_PID=$!
-    sleep 5
+    sleep 10
     find /app/data/fabric-ca-server/msp/keystore/ -type f -name '*_sk' -print0 | xargs -0 ls -t | tail -n +2 | xargs rm -f
     sleep 5
 fi
