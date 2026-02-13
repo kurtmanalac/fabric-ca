@@ -9,11 +9,11 @@ else
     fabric-ca-client register --id.name $CLIENT --id.secret $CLIENT_PW -u https://github-fabric-ca.railway.internal:7054 --id.type $ID_TYPE
     sleep 5
     FABRIC_CA_CLIENT_HOME=${FABRIC_CA_CLIENT_HOME:-/app/data/fabric-ca-client}
-    fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/tls --enrollment.profile tls --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem $CUSTOM_CMD
-    fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/msp --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem $CUSTOM_CMD
+    fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/tls --enrollment.profile tls --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
+    fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/msp --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
     mkdir -p $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/tlscacerts
-    cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/tlscacerts/tls-cert.pem
-    mv $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/cacerts/github-fabric-ca-railway-internal-7054.pem $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/cacerts/ca-cert.pem
+    # cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/tlscacerts/tls-cert.pem
+    # mv $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/cacerts/github-fabric-ca-railway-internal-7054.pem $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/cacerts/ca-cert.pem
     # rm -r $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/github-fabric-ca-railway-internal-7054.pem
     # cp $FABRIC_CA_SERVER_HOME/ca-cert.pem $FABRIC_CA_CLIENT_HOME/$ENROLL_ID/msp/cacerts/ca-cert.pem
     echo "$CLIENT registered!"
