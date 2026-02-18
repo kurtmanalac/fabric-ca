@@ -6,9 +6,9 @@ then
     echo "$CLIENT exists!"
 else
     mkdir -p $FABRIC_CA_CLIENT_HOME/$CLIENT/msp
-    fabric-ca-client register --id.name $CLIENT --id.secret $CLIENT_PW -u https://github-fabric-ca.railway.internal:7054 --id.type $ID_TYPE
-    sleep 5
     FABRIC_CA_CLIENT_HOME=${FABRIC_CA_CLIENT_HOME:-/app/data/fabric-ca-client}
+    fabric-ca-client register --id.name $CLIENT --id.secret $CLIENT_PW -u https://github-fabric-ca.railway.internal:7054 --id.type $ID_TYPE --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
+    sleep 5
     fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/tls --enrollment.profile tls --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
     fabric-ca-client enroll -u https://$CLIENT:$CLIENT_PW@github-fabric-ca.railway.internal:7054 --mspdir $FABRIC_CA_CLIENT_HOME/$CLIENT/msp --tls.certfiles /app/data/fabric-ca-server/tls-cert.pem
     mkdir -p $FABRIC_CA_CLIENT_HOME/$CLIENT/msp/tlscacerts
